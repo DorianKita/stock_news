@@ -1,0 +1,20 @@
+# Ignoruj całe wirtualne środowisko
+.venv/
+
+# Ignoruj plik z kluczami i zmiennymi środowiskowymi
+.env
+
+# Ignoruj pliki tymczasowe Pythona
+__pycache__/
+*.pyc
+
+# Ignoruj pliki konfiguracyjne IDE
+.idea/
+
+# Ignoruj pliki systemowe
+.DS_Store
+Thumbs.db
+
+# Ignoruj logi i cache
+logs/
+*.log

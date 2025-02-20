@@ -1,8 +1,28 @@
+import requests
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
+API_KEY = os.getenv('API_KEY')
+
+params = {
+    "function": "TIME_SERIES_DAILY",
+    "symbol": STOCK,
+    "apikey": API_KEY
+}
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
+url = f'https://www.alphavantage.co/query?'
+r = requests.get(url, params=params)
+data = r.json()
+
+# yesterday_price = data
+print(data)
+
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
