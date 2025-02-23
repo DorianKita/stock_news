@@ -9,6 +9,7 @@ load_dotenv()
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 API_KEY = os.getenv('API_KEY')
+NEWS_API_KEY = os.getenv('NEWS_API_KEY')
 
 params = {
     "function": "TIME_SERIES_DAILY",
@@ -16,27 +17,33 @@ params = {
     "apikey": API_KEY
 }
 
+news_params = {
+    'qInTitle': COMPANY_NAME,
+    'apiKey': NEWS_API_KEY
+}
+
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
 # url = f'https://www.alphavantage.co/query'
 # r = requests.get(url, params=params)
 # data = r.json()["Time Series (Daily)"]
-data_list = [value for (key, value) in data.items()]
-yesterday_data = data_list[0]
-yesterday_closing_price = yesterday_data['4. close']
+# data_list = [value for (key, value) in data.items()]
+# yesterday_data = data_list[0]
+# yesterday_closing_price = yesterday_data['4. close']
 
-day_before = data_list[1]
-day_before_closing_price = day_before['4. close']
-
-difference = abs(float(yesterday_closing_price) - float(day_before_closing_price))
-diff_percent = (difference / float(yesterday_closing_price)) * 100
-
-if diff_percent >5:
-    print("Get news")
-
+# day_before = data_list[1]
+# day_before_closing_price = day_before['4. close']
+#
+# difference = abs(float(yesterday_closing_price) - float(day_before_closing_price))
+# diff_percent = (difference / float(yesterday_closing_price)) * 100
 
 ## STEP 2: Use https://newsapi.org
-# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
+# Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME.
+# if diff_percent >5:
+new_data = requests.get('https://newsapi.org/v2/everything', params=news_params)
+articles = new_data.json()['articles']
+three_articles = articles[:3]
+print(three_articles)
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
