@@ -18,3 +18,5 @@ Thumbs.db
 # Ignoruj logi i cache
 logs/
 *.log
+
+data.py
