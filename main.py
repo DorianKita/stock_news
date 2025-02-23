@@ -29,7 +29,10 @@ day_before = data_list[1]
 day_before_closing_price = day_before['4. close']
 
 difference = abs(float(yesterday_closing_price) - float(day_before_closing_price))
+diff_percent = (difference / float(yesterday_closing_price)) * 100
 
+if diff_percent >5:
+    print("Get news")
 
 
 ## STEP 2: Use https://newsapi.org
