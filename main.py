@@ -43,11 +43,12 @@ news_params = {
 new_data = requests.get('https://newsapi.org/v2/everything', params=news_params)
 articles = new_data.json()['articles']
 three_articles = articles[:3]
-print(three_articles)
+# print(three_articles)
 
 ## STEP 3: Use https://www.twilio.com
 # Send a seperate message with the percentage change and each article's title and description to your phone number. 
 
+list_of_articles = [f"Headline: {article['title']}\nBrief: {article['description']}" for article in three_articles]
 
 #Optional: Format the SMS message like this: 
 """
