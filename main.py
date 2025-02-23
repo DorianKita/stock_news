@@ -1,3 +1,5 @@
+import datetime
+
 import requests
 import os
 from dotenv import load_dotenv
@@ -16,12 +18,18 @@ params = {
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").
-url = f'https://www.alphavantage.co/query?'
-r = requests.get(url, params=params)
-data = r.json()
+# url = f'https://www.alphavantage.co/query'
+# r = requests.get(url, params=params)
+# data = r.json()["Time Series (Daily)"]
+data_list = [value for (key, value) in data.items()]
+yesterday_data = data_list[0]
+yesterday_closing_price = yesterday_data['4. close']
 
-# yesterday_price = data
-print(data)
+day_before = data_list[1]
+day_before_closing_price = day_before['4. close']
+
+difference = abs(float(yesterday_closing_price) - float(day_before_closing_price))
+
 
 
 ## STEP 2: Use https://newsapi.org
